@@ -49,7 +49,7 @@ const createFeed = (log: string) => {
     favicon: `https://www-bd.fnal.gov/favicon.ico`,
     generator: os.hostname(),
     feedLinks: {
-      json: `https://www-bd.fnal.gov/Elog/api/search/entries?orLogName=${log}&startDate=2020-03-18+00%3A00%3A00`,
+      json: `https://www-bd.fnal.gov/Elog/api/search/entries?orLogName=${log}&sortingField=Modified+Date&startDate=2020-03-18+00%3A00%3A00`,
       atom: `https://www-bd.fnal.gov/feeds/elog-${log}.atom`,
       rss: `https://www-bd.fnal.gov/feeds/elog-${log}.rss`
     },
