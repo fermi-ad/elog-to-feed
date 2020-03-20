@@ -14,7 +14,7 @@ const logger = pino({
   level: process.env.LOG_LEVEL || `info`
 });
 const expressLogger = expressPino({ logger });
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 7780;
 const app = express();
 
 app.use(expressLogger);
