@@ -71,12 +71,14 @@ const populateFeed = async (log: string) => {
   const feed = createFeed(log);
 
   for (let entry of entries) {
+    const content = `${entry.creationDate} ${entry.author.firstName} ${entry.author.lastName} (${entry.author.name})
+${entry.text}`;
     feed.addItem({
       title: `${log}${printCategories(entry.categories)}: `,
       id: `https://www-bd.fnal.gov/Elog/?orEntryId=${entry.id}`,
       link: `https://www-bd.fnal.gov/Elog/?orEntryId=${entry.id}`,
       description: entry.text,
-      content: entry.text,
+      content,
       author: [
         {
           name: `${entry.author.firstName} ${entry.author.lastName}`,
