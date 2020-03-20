@@ -10,7 +10,9 @@ const Feed = feed.Feed;
 const startDate = `2020-03-18+00%3A00%3A00`;
 const elogAPIURI = `https://www-bd.fnal.gov/Elog/api/`;
 
-const logger = pino({ level: process.env.LOG_LEVEL || `info` });
+const logger = pino({
+  level: process.env.LOG_LEVEL || `info`
+});
 const expressLogger = expressPino({ logger });
 const PORT = process.env.PORT || 3333;
 const app = express();
