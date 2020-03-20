@@ -1,0 +1,16 @@
+[Unit]
+Description=Server that generates feed from ELog API
+After=network.target
+
+[Service]
+Type=simple
+User=beau
+WorkingDirectory=/export/home1/beau/Projects/elog-to-feed
+Environment=LOG_LEVEL=warn
+ExecStart=/export/home1/beau/.nvm/versions/node/v13.7.0/bin/node /export/home1/beau/Projects/elog-to-feed/built/src/elog-to-feed.js
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
