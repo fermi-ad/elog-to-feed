@@ -26,3 +26,22 @@ Valid atom request example:
 ```bash
 curl vclx3.fnal.gov:3333/feeds/Safety.atom
 ```
+
+## Service
+
+A service can be created to ensure uptime and syslogs by using `elog-to-feed.service` as a template and copying it to `/etc/systemd/system/`.
+
+To test that the service file works:
+```bash
+systemctl start elog-to-feed.service
+```
+
+You can see status and output using:
+```bash
+systemctl status elog-to-feed.service -l
+```
+
+To have it start on system start:
+```bash
+systemctl enable elog-to-feed.service
+```
