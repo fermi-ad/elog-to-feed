@@ -4,8 +4,8 @@
   "description": "Generates feed from ELog API.",
   "main": "built/src/elog-to-feed.js",
   "scripts": {
-    "start": "npm run lint && npm run build && node built/src/elog-to-feed.js",
-    "build": "tsc",
+    "start": "npm run build && node built/src/elog-to-feed.js",
+    "build": "npm run lint && tsc",
     "lint": "eslint --fix src/*",
     "clean": "rm -rf built"
   },
