@@ -99,9 +99,11 @@ app.get(`/feeds/:log.:feedType`, (req, res) => {
       populateFeed(log).then(feed => {
         if (feedType === `rss`) {
           logger.info(`Generating rss feed for ${log}`);
+          res.type(`application/rss+xml`);
           res.send(feed.rss2());
         } else if (feedType === `atom`) {
           logger.info(`Generating atom feed for ${log}`);
+          res.type(`application/atom+xml`);
           res.send(feed.atom1());
         }
       });
