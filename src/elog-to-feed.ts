@@ -7,8 +7,8 @@ import pino from "pino";
 import expressPino from "express-pino-logger";
 
 const Feed = feed.Feed;
-const startDate = `2020-03-18+00%3A00%3A00`;
 const elogAPIURI = `https://www-bd.fnal.gov/Elog/api/`;
+const startDate = `2020-03-18+00%3A00%3A00`;
 
 const logger = pino({
   level: process.env.LOG_LEVEL || `info`
@@ -73,6 +73,7 @@ const populateFeed = async (log: string) => {
   for (let entry of entries) {
     const content = `${entry.creationDate} ${entry.author.firstName} ${entry.author.lastName} (${entry.author.name})
 ${entry.text}`;
+
     feed.addItem({
       title: `${log}${printCategories(entry.categories)}: `,
       id: `https://www-bd.fnal.gov/Elog/?orEntryId=${entry.id}`,
