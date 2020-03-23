@@ -99,14 +99,18 @@ app.get(`/feeds/:log.:feedType`, (req, res) => {
   getLogs().then(logs => {
     if (logs.includes(log)) {
       populateFeed(log).then(feed => {
+        feed.options.feedLinks.atom = `${feedURI}${log}.${feedType}`;
+        logger.info(`Generating ${feedType} feed for ${log}`);
+
         if (feedType === `rss`) {
-          logger.info(`Generating rss feed for ${log}`);
           res.type(`application/rss+xml`);
           res.send(feed.rss2());
         } else if (feedType === `atom`) {
-          logger.info(`Generating atom feed for ${log}`);
           res.type(`application/atom+xml`);
           res.send(feed.atom1());
+        } else if (feedType === `json`) {
+          res.type(`application/json`);
+          res.send(feed.json1());
         }
       });
     } else {
