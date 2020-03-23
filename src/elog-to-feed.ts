@@ -73,15 +73,24 @@ const populateFeed = async (log: string) => {
   const feed = createFeed(log);
 
   for (let entry of entries) {
-    const content = `${entry.creationDate} ${entry.author.firstName} ${entry.author.lastName} (${entry.author.name})
-${entry.text}`;
+    const formattedTitle = `${entry.creationDate} ${entry.author.firstName} ${entry.author.lastName} (${entry.author.name})`;
+    const formattedEntry = `${entry.text}${
+      entry.categories.length > 0
+        ? `
+        Categories: ${printCategories(entry.categories)}`
+        : ``
+    }`;
 
     feed.addItem({
+      title: formattedTitle,
       id: `${elogURI}?orEntryId=${entry.id}`,
       link: `${elogURI}?orEntryId=${entry.id}`,
+      description: formattedEntry,
+      content: formattedEntry,
       author: [
         {
           name: `${entry.author.firstName} ${entry.author.lastName}`,
+          email: entry.author.emailAddress,
           link: `${elogURI}?orUserName=${entry.author.name}`
         }
       ],
