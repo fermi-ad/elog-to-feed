@@ -1,6 +1,6 @@
 # ELog to Feed
 
-This web service using the AD ELog API to generate feeds in the rss or atom formats.
+This web service uses the AD ELog API to generate feeds in the rss or atom formats.
 
 ## Install
 
