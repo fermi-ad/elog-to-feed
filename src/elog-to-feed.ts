@@ -50,14 +50,11 @@ const createFeed = (log: string) => {
     image: `${elogURI}graphics/FnalLogo.png`,
     favicon: `https://www-bd.fnal.gov/favicon.ico`,
     generator: os.hostname(),
-    feedLinks: {
-      json: `https://www-bd.fnal.gov/Elog/api/search/entries?orLogName=${log}&sortingField=Modified+Date&startDate=2020-03-18+00%3A00%3A00`,
-      atom: `https://www-bd.fnal.gov/feeds/elog-${log}.atom`,
-      rss: `https://www-bd.fnal.gov/feeds/elog-${log}.rss`
-    },
+    feedLinks: { atom: `${feedURI}${log}.rss` },
     author: {
       name: `Beau Harrison`,
-      email: `beau@fnal.gov`
+      email: `beau@fnal.gov`,
+      link: `https://tele.fnal.gov/cgi-bin/telephone.script?type=id&string=15660N`
     }
   } as FeedOptions);
 };
