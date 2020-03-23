@@ -7,7 +7,9 @@ import pino from "pino";
 import expressPino from "express-pino-logger";
 
 const Feed = feed.Feed;
-const elogAPIURI = `https://www-bd.fnal.gov/Elog/api/`;
+const feedURI = `https://www-bd.fnal.gov/feeds/`;
+const elogURI = `https://www-bd.fnal.gov/Elog/`;
+const elogAPIURI = `${elogURI}api/`;
 const startDate = `2020-03-18+00%3A00%3A00`;
 
 const logger = pino({
@@ -28,7 +30,7 @@ type category = {
 };
 
 const getLogs = async () => {
-  return await fetch(`https://www-bd.fnal.gov/Elog/api/get/logs/all`)
+  return await fetch(`${elogAPIURI}get/logs/all`)
     .then(response => response.json())
     .then(logs => logs.map((log: log) => log.name));
 };
@@ -43,9 +45,9 @@ const createFeed = (log: string) => {
   return new Feed({
     title: `AD ELog: ${log}`,
     description: `ELog entries tagged in the ${log} log.`,
-    id: `https://www-bd.fnal.gov/Elog`,
-    link: `https://www-bd.fnal.gov/feeds/elog-${log}.rss`,
-    image: `https://www-bd.fnal.gov/Elog/graphics/FnalLogo.png`,
+    id: elogURI,
+    link: `${feedURI}${log}.rss`,
+    image: `${elogURI}graphics/FnalLogo.png`,
     favicon: `https://www-bd.fnal.gov/favicon.ico`,
     generator: os.hostname(),
     feedLinks: {
@@ -75,15 +77,12 @@ const populateFeed = async (log: string) => {
 ${entry.text}`;
 
     feed.addItem({
-      title: `${log}${printCategories(entry.categories)}: `,
-      id: `https://www-bd.fnal.gov/Elog/?orEntryId=${entry.id}`,
-      link: `https://www-bd.fnal.gov/Elog/?orEntryId=${entry.id}`,
-      description: entry.text,
-      content,
+      id: `${elogURI}?orEntryId=${entry.id}`,
+      link: `${elogURI}?orEntryId=${entry.id}`,
       author: [
         {
           name: `${entry.author.firstName} ${entry.author.lastName}`,
-          email: entry.author.emailAddress
+          link: `${elogURI}?orUserName=${entry.author.name}`
         }
       ],
       date: new Date(entry.modifiedDate)
