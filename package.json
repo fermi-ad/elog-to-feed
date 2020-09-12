@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
     "feed": "^4.1.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pino": "^5.17.0"
   },
   "devDependencies": {
